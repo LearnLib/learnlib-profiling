@@ -25,6 +25,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -58,16 +59,20 @@ public class MemProbeChart {
 		}
 
 		final JFreeChart chart = ChartFactory.createXYLineChart(
-				"Memory consumption (bytes)", // chart title
+				"Memory consumption", // chart title
 				"Progress (%)", // domain axis label
-				"Used memory", // range axis label
+				"Used memory (bytes)", // range axis label
 				collection, // data
 				PlotOrientation.VERTICAL,
 				true, // include legend
 				true,
 				false);
 
-
+        final XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesShapesVisible(1, false);
+		chart.getXYPlot().setRenderer(renderer);
+		
+		
 		final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         
