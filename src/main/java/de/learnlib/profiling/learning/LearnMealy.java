@@ -102,6 +102,7 @@ public class LearnMealy {
 			memprobe.stopProbing();
 
 			memdata.put(learnerName, memprobe.getSamples());
+			algos.put(learnerName, null);
 
 		}
 
