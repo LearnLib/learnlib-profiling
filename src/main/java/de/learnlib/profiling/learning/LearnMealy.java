@@ -28,7 +28,7 @@ import de.learnlib.oracles.SimulatorOracle;
 import de.learnlib.profiling.memprobe.MemProbeChart;
 import de.learnlib.profiling.memprobe.MemProbeSample;
 import de.learnlib.profiling.memprobe.MemProbeThread;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +72,7 @@ public class LearnMealy {
 		Map<String, LearningAlgorithm> algos = new HashMap<>();
 
 		algos.put("MealyDHC", new MealyDHC(alphabet, simoracle));
-		//algos.put("ClasicLStarMealy", new ClassicLStarMealy(alphabet, simoracle, Collections.emptyList(), ObservationTableCEXHandlers.RIVEST_SCHAPIRE, ClosingStrategies.CLOSE_FIRST));
+		algos.put("ClasicLStarMealy", ClassicLStarMealy.createForWordOracle(alphabet, simoracle, new ArrayList<Word<Symbol>>(), ObservationTableCEXHandlers.RIVEST_SCHAPIRE, ClosingStrategies.CLOSE_FIRST));
 
 		Map<String, List<MemProbeSample>> memdata = new HashMap<>();
 
