@@ -192,6 +192,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>learnlib-dhc</artifactId>
         </dependency>
+		<dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>learnlib-lstar</artifactId>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>learnlib-test-support</artifactId>
@@ -251,6 +255,11 @@
 			<dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>learnlib-dhc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+			<dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-lstar</artifactId>
                 <version>${project.version}</version>
             </dependency>
 			<dependency>

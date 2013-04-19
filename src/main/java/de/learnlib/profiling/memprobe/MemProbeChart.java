@@ -19,8 +19,11 @@ package de.learnlib.profiling.memprobe;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.List;
-import java.util.Map;
+
 import javax.swing.JFrame;
+
+import net.automatalib.commons.util.Pair;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -35,22 +38,20 @@ import org.jfree.data.xy.XYSeriesCollection;
  */
 public class MemProbeChart {
 
-	public static void displayMemoryCharts(Map<String, List<MemProbeSample>> sampleMap) {
+	public static void displayMemoryCharts(List<Pair<String, List<MemProbeSample>>> namedSamples) {
 
 		final XYSeriesCollection collection = new XYSeriesCollection();
 
-		for (String seriesName : sampleMap.keySet()) {
-			List<MemProbeSample> samples = sampleMap.get(seriesName);
+		for(Pair<String,List<MemProbeSample>> ns : namedSamples) {
+			List<MemProbeSample> samples = ns.getSecond();
 
-			XYSeries series = new XYSeries(seriesName);
+			XYSeries series = new XYSeries(ns.getFirst());
 
 			for (int i = 0; i < samples.size(); ++i) {
 				MemProbeSample sample = samples.get(i);
 
-				float percentage = ((float) i) / ((float) samples.size() - 1);
-				percentage *= 100f;
-
-				series.add(percentage, sample.usedMemory);
+				//series.add(percentage, sample.usedMemory);
+				series.add(sample.time, sample.usedMemory);
 			}
 
 			collection.addSeries(series);
@@ -59,7 +60,7 @@ public class MemProbeChart {
 
 		final JFreeChart chart = ChartFactory.createXYLineChart(
 				"Memory consumption", // chart title
-				"Progress (%)", // domain axis label
+				"Time (ms)", // domain axis label
 				"Used memory (bytes)", // range axis label
 				collection, // data
 				PlotOrientation.VERTICAL,
