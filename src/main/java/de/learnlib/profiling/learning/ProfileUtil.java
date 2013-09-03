@@ -1,11 +1,11 @@
 package de.learnlib.profiling.learning;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.automatalib.automata.UniversalDeterministicAutomaton;
-import net.automatalib.commons.util.Pair;
 import de.learnlib.api.EquivalenceOracle;
 import de.learnlib.api.LearningAlgorithm;
 import de.learnlib.oracles.DefaultQuery;
@@ -16,16 +16,16 @@ public class ProfileUtil {
 
 	
 	public static <I,O,A extends UniversalDeterministicAutomaton<?, I, ?, ?, ?>>
-	List<Pair<String,List<MemProbeSample>>> profileLearners(
-			List<Pair<String,? extends LearningAlgorithm<? extends A,I,O>>> algos,
+	Map<String,List<MemProbeSample>> profileLearners(
+			List<? extends NamedLearner<A,I,O>> algos,
 			Collection<? extends I> inputs,
 			EquivalenceOracle<? super A, I, O> eqOracle) {
 		
-		List<Pair<String,List<MemProbeSample>>> memdata = new ArrayList<>();
+		Map<String,List<MemProbeSample>> memdata = new HashMap<>();
 		
-		for(Pair<String,? extends LearningAlgorithm<? extends A,I,O>> p : algos) {
-			String name = p.getFirst();
-			LearningAlgorithm<? extends A,I,O> learner = p.getSecond();
+		for(NamedLearner<A,I,O> p : algos) {
+			String name = p.getName();
+			LearningAlgorithm<? extends A,I,O> learner = p.getLearner();
 			if(learner == null)
 				continue;
 			
@@ -49,8 +49,7 @@ public class ProfileUtil {
 			
 
 			memprobe.stopProbing();
-			memdata.add(Pair.make(name, memprobe.getSamples()));
-			p.setSecond(null);
+			memdata.put(name, memprobe.getSamples());
 		}
 
 		return memdata;

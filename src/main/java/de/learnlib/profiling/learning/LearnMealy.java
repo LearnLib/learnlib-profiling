@@ -16,26 +16,24 @@
  */
 package de.learnlib.profiling.learning;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.automatalib.automata.transout.MealyMachine;
-import net.automatalib.automata.transout.impl.FastMealy;
-import net.automatalib.commons.util.Pair;
+import net.automatalib.automata.transout.impl.compact.CompactMealy;
 import net.automatalib.util.automata.random.RandomAutomata;
 import net.automatalib.words.Alphabet;
 import net.automatalib.words.Word;
 import net.automatalib.words.impl.FastAlphabet;
 import net.automatalib.words.impl.Symbol;
+import de.learnlib.algorithms.dhc.mealy.MealyDHC;
 import de.learnlib.algorithms.lstargeneric.ce.ObservationTableCEXHandlers;
 import de.learnlib.algorithms.lstargeneric.closing.ClosingStrategies;
 import de.learnlib.algorithms.lstargeneric.mealy.ClassicLStarMealy;
 import de.learnlib.algorithms.lstargeneric.mealy.ExtensibleLStarMealy;
-import de.learnlib.api.LearningAlgorithm;
-import de.learnlib.dhc.mealy.MealyDHC;
 import de.learnlib.eqtests.basic.SimulatorEQOracle;
 import de.learnlib.mealy.MealyUtil;
 import de.learnlib.oracles.SimulatorOracle;
@@ -62,8 +60,8 @@ public class LearnMealy {
 		List<String> outputs = Arrays.asList("o1", "o2", "o3");
 
 
-		FastMealy<Symbol,String> fm = RandomAutomata.randomDeterministic(new Random(1337),
-				100000, inputs, null, outputs, new FastMealy<Symbol,String>(inputs));
+		MealyMachine<?,Symbol,?,String> fm = RandomAutomata.randomDeterministic(new Random(1337),
+				10000, inputs, null, outputs, new CompactMealy<Symbol,String>(inputs));
 
 
 		SimulatorOracle<Symbol, Word<String>> simoracle = new SimulatorOracle<>(fm);
@@ -71,22 +69,21 @@ public class LearnMealy {
 
 
 
-		List<Pair<String,? extends LearningAlgorithm<? extends MealyMachine<?,Symbol,?,String>,Symbol,Word<String>>>> algos
-					= new ArrayList<>();
+		NamedLearnerList<MealyMachine<?,Symbol,?,String>,Symbol,Word<String>> algos
+			= new NamedLearnerList<>();
 					
-		
-		algos.add(Pair.make("MealyDHC", new MealyDHC<>(inputs, simoracle)));
-		algos.add(Pair.make("ClassicLStarMealy",
+		algos.addLearner("MealyDHC", new MealyDHC<>(inputs, simoracle));
+		algos.addLearner("ClassicLStarMealy",
 				MealyUtil.wrapSymbolLearner(
 						ClassicLStarMealy.createForWordOracle(
 								inputs,
 								simoracle,
 								Collections.<Word<Symbol>>emptyList(),
 								ObservationTableCEXHandlers.RIVEST_SCHAPIRE,
-								ClosingStrategies.CLOSE_FIRST))));
-		algos.add(Pair.make("ExtensibleLStarMealy", new ExtensibleLStarMealy<>(inputs, simoracle, Collections.<Word<Symbol>>emptyList(), ObservationTableCEXHandlers.RIVEST_SCHAPIRE, ClosingStrategies.CLOSE_FIRST)));
+								ClosingStrategies.CLOSE_FIRST)));
+		algos.addLearner("ExtensibleLStarMealy", new ExtensibleLStarMealy<>(inputs, simoracle, Collections.<Word<Symbol>>emptyList(), ObservationTableCEXHandlers.RIVEST_SCHAPIRE, ClosingStrategies.CLOSE_FIRST));
 
-		List<Pair<String,List<MemProbeSample>>> memdata
+		Map<String,List<MemProbeSample>> memdata
 			= ProfileUtil.profileLearners(algos, inputs, eqoracle);
 
 		MemProbeChart.displayMemoryCharts(memdata);
