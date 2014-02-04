@@ -7,7 +7,7 @@
     -->
     <groupId>de.learnlib</groupId>
     <artifactId>learnlib-profiling</artifactId>
-    <version>0.9.1-SNAPSHOT</version>
+    <version>0.10.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>learnlib-profiling</name>
     <url>http://www.learnlib.de</url>
@@ -56,7 +56,7 @@
         <!--
             dependency versions
         -->
-        <learnlib.version>0.9.1-SNAPSHOT</learnlib.version>
+        <learnlib.version>0.10.0-SNAPSHOT</learnlib.version>
         <jfreechart.version>1.0.14</jfreechart.version>
         <testng.version>6.8</testng.version>
         <attach-source.version>2.0.4</attach-source.version>
@@ -188,31 +188,6 @@
   <!--  
     ===============================  DEFAULT DEP. VERSIONS =======================  
     -->
-    <dependencyManagement>
-        <dependencies>
-            <!-- Import LearnLib dependencies -->
-            <dependency>
-                <groupId>de.learnlib</groupId>
-                <artifactId>learnlib-parent</artifactId>
-                <version>${learnlib.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jfree</groupId>
-                <artifactId>jfreechart</artifactId>
-                <version>${jfreechart.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>${testng.version}</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -220,9 +195,13 @@
             <artifactId>learnlib-dhc</artifactId>
         </dependency>
 		<dependency>
-            <groupId>de.learnlib</groupId>
-            <artifactId>learnlib-lstar-baseline</artifactId>
-        </dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>learnlib-lstar-generic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>learnlib-lstar-baseline</artifactId>
+		</dependency>
         <dependency>
             <groupId>de.learnlib</groupId>
             <artifactId>learnlib-test-support</artifactId>
@@ -230,9 +209,10 @@
         <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jfreechart</artifactId>
+            <version>1.0.14</version>
         </dependency>
         <dependency>
-            <groupId>de.learnlib</groupId>
+			<groupId>${project.groupId}</groupId>
             <artifactId>learnlib-simulator</artifactId>
         </dependency>
         <dependency>
@@ -247,10 +227,107 @@
             <groupId>de.learnlib</groupId>
             <artifactId>learnlib-basic-eqtests</artifactId>
         </dependency>
-        <dependency>
-            <groupId>de.learnlib</groupId>
-            <artifactId>learnlib-lstar-generic</artifactId>
-        </dependency>
     </dependencies>
+    <dependencyManagement>
+		<dependencies>
+			<!-- Import LearnLib dependencies -->
+			<dependency>
+				<groupId>de.learnlib</groupId>
+				<artifactId>learnlib-parent</artifactId>
+				<version>${learnlib.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jfree</groupId>
+				<artifactId>jfreechart</artifactId>
+				<version>${jfreechart.version}</version>
+			</dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-test-support</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+			<dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-lstar-baseline</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+			<dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-lstar-generic</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+			<dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-dhc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+			<dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-lstar</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+			<dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-basic-eqtests</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-simulator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+			<dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-counterexamples</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+			<dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>learnlib-cache</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.automatalib</groupId>
+                <artifactId>automata-api</artifactId>
+                <version>${automatalib.version}</version>                        
+            </dependency>            
+            <dependency>
+                <groupId>net.automatalib</groupId>
+                <artifactId>automata-core</artifactId>
+                <version>${automatalib.version}</version>                        
+            </dependency>
+            <dependency>
+                <groupId>net.automatalib</groupId>
+                <artifactId>automata-util</artifactId>
+                <version>${automatalib.version}</version>                        
+            </dependency>
+            <dependency>
+                <groupId>net.automatalib</groupId>
+                <artifactId>automata-commons-dotutil</artifactId>
+                <version>${automatalib.version}</version>                        
+            </dependency>
+			<dependency>
+                <groupId>net.automatalib</groupId>
+                <artifactId>automata-incremental</artifactId>
+                <version>${automatalib.version}</version>                        
+            </dependency>            
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>test</scope>
+            </dependency>            
+        </dependencies>
+    </dependencyManagement>    
+        
 </project>
 

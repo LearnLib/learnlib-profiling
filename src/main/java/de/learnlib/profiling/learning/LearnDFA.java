@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import de.learnlib.algorithms.baselinelstar.BaselineLStar;
 import net.automatalib.automata.fsa.DFA;
 import net.automatalib.automata.fsa.impl.compact.CompactDFA;
 import net.automatalib.util.automata.random.RandomAutomata;
@@ -55,8 +56,8 @@ public class LearnDFA {
 				inputs, simoracle, Collections.<Word<Symbol>> emptyList(),
 				ObservationTableCEXHandlers.CLASSIC_LSTAR,
 				ClosingStrategies.CLOSE_FIRST));
-		//algos.add(Pair.make("Angluin", new BaselineLStar<>(inputs, simoracle)));
-		
+		algos.addLearner("Angluin", new BaselineLStar<Symbol>(inputs, simoracle));
+
 		Map<String,List<MemProbeSample>> memdata = ProfileUtil
 				.profileLearners(algos, inputs, eqoracle);
 
