@@ -23,14 +23,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
-
-import net.automatalib.commons.util.Pair;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -46,17 +43,17 @@ import org.jfree.data.xy.XYSeriesCollection;
  */
 public class MemProbeChart {
 
-	public static void displayMemoryCharts(List<Pair<String, List<MemProbeSample>>> namedSamples) {
+	public static void displayMemoryCharts(Map<String,? extends List<? extends MemProbeSample>> namedSamples) {
 
 		final XYSeriesCollection collection = new XYSeriesCollection();
 
 		final Map<String, Long> memConsumption = new HashMap<>();
 		final Map<String, Long> timeConsumption = new HashMap<>();
 		
-		for(Pair<String,List<MemProbeSample>> ns : namedSamples) {
-			List<MemProbeSample> samples = ns.getSecond();
+		for(Map.Entry<String,? extends List<? extends MemProbeSample>> ns : namedSamples.entrySet()) {
+			List<? extends MemProbeSample> samples = ns.getValue();
 
-			String seriesName = ns.getFirst();
+			String seriesName = ns.getKey();
 			XYSeries series = new XYSeries(seriesName);
 
 			long maxmem = 0;
@@ -111,6 +108,11 @@ public class MemProbeChart {
 	
 
 	private static class ConsumptionTableModel extends AbstractTableModel {
+		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		
 		private Object[][] data;
 		

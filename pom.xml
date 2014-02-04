@@ -57,6 +57,8 @@
             dependency versions
         -->
         <automatalib.version>0.4.0-SNAPSHOT</automatalib.version>
+        <learnlib.version>0.10.0-SNAPSHOT</learnlib.version>
+        <jfreechart.version>1.0.14</jfreechart.version>
         <testng.version>6.8</testng.version>
         <attach-source.version>2.0.4</attach-source.version>
         <attach-javadoc.version>2.3</attach-javadoc.version>
@@ -187,21 +189,22 @@
   <!--  
     ===============================  DEFAULT DEP. VERSIONS =======================  
     -->
+
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>de.learnlib</groupId>
             <artifactId>learnlib-dhc</artifactId>
         </dependency>
 		<dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>learnlib-lstar-generic</artifactId>
-        </dependency>
+		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>learnlib-lstar-baseline</artifactId>
 		</dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>de.learnlib</groupId>
             <artifactId>learnlib-test-support</artifactId>
         </dependency>
         <dependency>
@@ -210,24 +213,39 @@
             <version>1.0.14</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
             <artifactId>learnlib-simulator</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>de.learnlib</groupId>
             <artifactId>learnlib-cache</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>de.learnlib</groupId>
             <artifactId>learnlib-counterexamples</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>de.learnlib</groupId>
             <artifactId>learnlib-basic-eqtests</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>
-        <dependencies>
+		<dependencies>
+			<!-- Import LearnLib dependencies -->
+			<dependency>
+				<groupId>de.learnlib</groupId>
+				<artifactId>learnlib-parent</artifactId>
+				<version>${learnlib.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jfree</groupId>
+				<artifactId>jfreechart</artifactId>
+				<version>${jfreechart.version}</version>
+			</dependency>
+
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>learnlib-test-support</artifactId>
