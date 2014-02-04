@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import de.learnlib.algorithms.baselinelstar.BaselineLStar;
 import net.automatalib.automata.fsa.DFA;
 import net.automatalib.automata.fsa.impl.compact.CompactDFA;
 import net.automatalib.commons.util.Pair;
@@ -14,7 +15,6 @@ import net.automatalib.words.Alphabet;
 import net.automatalib.words.Word;
 import net.automatalib.words.impl.FastAlphabet;
 import net.automatalib.words.impl.Symbol;
-import de.learnlib.algorithms.angluin.Angluin;
 import de.learnlib.algorithms.lstargeneric.ce.ObservationTableCEXHandlers;
 import de.learnlib.algorithms.lstargeneric.closing.ClosingStrategies;
 import de.learnlib.algorithms.lstargeneric.dfa.ExtensibleLStarDFA;
@@ -52,7 +52,7 @@ public class LearnDFA {
 				inputs, simoracle, Collections.<Word<Symbol>> emptyList(),
 				ObservationTableCEXHandlers.CLASSIC_LSTAR,
 				ClosingStrategies.CLOSE_FIRST)));
-		algos.add(Pair.make("Angluin", new Angluin<>(inputs, simoracle)));
+		algos.add(Pair.make("Angluin", new BaselineLStar<Symbol>(inputs, simoracle)));
 		
 		List<Pair<String, List<MemProbeSample>>> memdata = ProfileUtil
 				.profileLearners(algos, inputs, eqoracle);

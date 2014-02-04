@@ -35,7 +35,7 @@ import de.learnlib.algorithms.lstargeneric.closing.ClosingStrategies;
 import de.learnlib.algorithms.lstargeneric.mealy.ClassicLStarMealy;
 import de.learnlib.algorithms.lstargeneric.mealy.ExtensibleLStarMealy;
 import de.learnlib.api.LearningAlgorithm;
-import de.learnlib.dhc.mealy.MealyDHC;
+import de.learnlib.algorithms.dhc.mealy.MealyDHC;
 import de.learnlib.eqtests.basic.SimulatorEQOracle;
 import de.learnlib.mealy.MealyUtil;
 import de.learnlib.oracles.SimulatorOracle;
