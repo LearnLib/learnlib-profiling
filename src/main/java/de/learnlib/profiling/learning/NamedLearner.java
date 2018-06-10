@@ -1,28 +1,42 @@
+/* Copyright (C) 2013-2018 TU Dortmund
+ * This file is part of LearnLib, http://www.learnlib.de/.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.learnlib.profiling.learning;
 
-import de.learnlib.api.LearningAlgorithm;
+import de.learnlib.api.algorithm.LearningAlgorithm;
 
-public class NamedLearner<M,I,O> {
+public class NamedLearner<M, I, O> {
 
-	private final String name;
-	private final LearningAlgorithm<? extends M,I,O> learner;
-	
-	public static <M,I,O> NamedLearner<M,I,O> create(String name, LearningAlgorithm<M, I, O> learner) {
-		return new NamedLearner<M,I,O>(name, learner);
-	}
-	
-	public NamedLearner(String name, LearningAlgorithm<? extends M, I, O> learner) {
-		this.name = name;
-		this.learner = learner;
-	}
+    private final String name;
+    private final LearningAlgorithm<? extends M, I, O> learner;
 
+    public NamedLearner(String name, LearningAlgorithm<? extends M, I, O> learner) {
+        this.name = name;
+        this.learner = learner;
+    }
 
-	public String getName() {
-		return name;
-	}
-	
-	public LearningAlgorithm<? extends M,I,O> getLearner() {
-		return learner;
-	}
+    public String getName() {
+        return name;
+    }
+
+    public LearningAlgorithm<? extends M, I, O> getLearner() {
+        return learner;
+    }
+
+    public static <M, I, O> NamedLearner<M, I, O> create(String name, LearningAlgorithm<M, I, O> learner) {
+        return new NamedLearner<>(name, learner);
+    }
 
 }

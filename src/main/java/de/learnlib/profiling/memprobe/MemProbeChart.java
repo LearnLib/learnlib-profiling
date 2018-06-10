@@ -1,18 +1,17 @@
-/* Copyright (C) 2013 TU Dortmund
+/* Copyright (C) 2013-2018 TU Dortmund
  * This file is part of LearnLib, http://www.learnlib.de/.
- * 
- * LearnLib is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 3.0 as published by the Free Software Foundation.
- * 
- * LearnLib is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with LearnLib; if not, see
- * <http://www.gnu.de/documents/lgpl.en.html>.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package de.learnlib.profiling.memprobe;
 
@@ -41,125 +40,118 @@ import org.jfree.data.xy.XYSeriesCollection;
  *
  * @author maik
  */
-public class MemProbeChart {
+public final class MemProbeChart {
 
-	public static void displayMemoryCharts(Map<String,? extends List<? extends MemProbeSample>> namedSamples) {
+    private static final int DEFAULT_WIDTH = 640;
+    private static final int DEFAULT_HEIGHT = 480;
 
-		final XYSeriesCollection collection = new XYSeriesCollection();
+    private MemProbeChart() {
+        // prevent instantiation
+    }
 
-		final Map<String, Long> memConsumption = new HashMap<>();
-		final Map<String, Long> timeConsumption = new HashMap<>();
-		
-		for(Map.Entry<String,? extends List<? extends MemProbeSample>> ns : namedSamples.entrySet()) {
-			List<? extends MemProbeSample> samples = ns.getValue();
+    public static void displayMemoryCharts(Map<String, ? extends List<? extends MemProbeSample>> namedSamples) {
 
-			String seriesName = ns.getKey();
-			XYSeries series = new XYSeries(seriesName);
+        final XYSeriesCollection collection = new XYSeriesCollection();
 
-			long maxmem = 0;
-			long maxtime = 0;
-			
-			for (int i = 0; i < samples.size(); ++i) {
-				MemProbeSample sample = samples.get(i);
+        final Map<String, Long> memConsumption = new HashMap<>();
+        final Map<String, Long> timeConsumption = new HashMap<>();
 
-				//series.add(percentage, sample.usedMemory);
-				series.add(sample.time, sample.usedMemory);
-				if(sample.usedMemory > maxmem) {
-					maxmem = sample.usedMemory;
-				}
-				// search for biggest timestamp, just in case the order of
-				// the samples is not monotonic
-				if(sample.time > maxtime) {
-					maxtime = sample.time;
-				}
-			}
-			
-			memConsumption.put(seriesName, maxmem);
-			timeConsumption.put(seriesName, maxtime);
-			
-			collection.addSeries(series);
-		}
+        for (Map.Entry<String, ? extends List<? extends MemProbeSample>> ns : namedSamples.entrySet()) {
+            List<? extends MemProbeSample> samples = ns.getValue();
 
-		final JFreeChart chart = ChartFactory.createXYLineChart(
-				"Memory consumption", // chart title
-				"Time (ms)", // domain axis label
-				"Used memory (bytes)", // range axis label
-				collection, // data
-				PlotOrientation.VERTICAL,
-				true, // include legend
-				true,
-				false);
-		
-		final TableModel tableModel = new ConsumptionTableModel(memConsumption, timeConsumption);
-		final JTable table = new JTable(tableModel);
-		table.setAutoCreateRowSorter(true);
-		
-		final ChartPanel chartPanel = new ChartPanel(chart);
-		final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, chartPanel, new JScrollPane(table));
-		
-		JFrame frame = new JFrame("Memory consumption");
-		frame.setLayout(new BorderLayout());
-		frame.add(splitPane, BorderLayout.CENTER);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setMinimumSize(new Dimension(640, 480));
-		frame.pack();
-		frame.setVisible(true);
-	}
-	
+            String seriesName = ns.getKey();
+            XYSeries series = new XYSeries(seriesName);
 
-	private static class ConsumptionTableModel extends AbstractTableModel {
-		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		
-		private Object[][] data;
-		
-		private ConsumptionTableModel(Map<String, Long> memConsumption, Map<String, Long> timeConsumption) {
-			data = new Object[memConsumption.keySet().size()][3];
-			int i = 0;
-			for(String seriesName : memConsumption.keySet()) {
-				long maxmem = memConsumption.get(seriesName);
-				long maxtime = timeConsumption.get(seriesName);
-				data[i][0] = seriesName;
-				data[i][1] = maxmem;
-				data[i][2] = maxtime;
-				++i;
-			}
-		}
-		
+            long maxmem = 0;
+            long maxtime = 0;
 
-		@Override
-		public int getRowCount() {
-			return data.length;
-		}
+            for (int i = 0; i < samples.size(); ++i) {
+                MemProbeSample sample = samples.get(i);
 
-		@Override
-		public int getColumnCount() {
-			return data[0].length;
-		}
+                //series.add(percentage, sample.usedMemory);
+                series.add(sample.time, sample.usedMemory);
+                if (sample.usedMemory > maxmem) {
+                    maxmem = sample.usedMemory;
+                }
+                // search for biggest timestamp, just in case the order of
+                // the samples is not monotonic
+                if (sample.time > maxtime) {
+                    maxtime = sample.time;
+                }
+            }
 
-		@Override
-		public String getColumnName(int columnIndex) {
-			String[] names = {
-				"Algorithm",
-				"max mem (bytes)",
-				"time (ms)"
-			};
-			return names[columnIndex];
-		}
+            memConsumption.put(seriesName, maxmem);
+            timeConsumption.put(seriesName, maxtime);
 
-		@Override
-		public Class<?> getColumnClass(int columnIndex) {
-			return getValueAt(0, columnIndex).getClass();
-		}
+            collection.addSeries(series);
+        }
 
-		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			return data[rowIndex][columnIndex];
-		}
-		
-	}
-	
+        final JFreeChart chart = ChartFactory.createXYLineChart("Memory consumption", // chart title
+                                                                "Time (ms)", // domain axis label
+                                                                "Used memory (bytes)", // range axis label
+                                                                collection, // data
+                                                                PlotOrientation.VERTICAL, true, // include legend
+                                                                true, false);
+
+        final TableModel tableModel = new ConsumptionTableModel(memConsumption, timeConsumption);
+        final JTable table = new JTable(tableModel);
+        table.setAutoCreateRowSorter(true);
+
+        final ChartPanel chartPanel = new ChartPanel(chart);
+        final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, chartPanel, new JScrollPane(table));
+
+        JFrame frame = new JFrame("Memory consumption");
+        frame.setLayout(new BorderLayout());
+        frame.add(splitPane, BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    private static final class ConsumptionTableModel extends AbstractTableModel {
+
+        private Object[][] data;
+
+        private ConsumptionTableModel(Map<String, Long> memConsumption, Map<String, Long> timeConsumption) {
+            data = new Object[memConsumption.keySet().size()][3];
+            int i = 0;
+            for (String seriesName : memConsumption.keySet()) {
+                long maxmem = memConsumption.get(seriesName);
+                long maxtime = timeConsumption.get(seriesName);
+                data[i][0] = seriesName;
+                data[i][1] = maxmem;
+                data[i][2] = maxtime;
+                ++i;
+            }
+        }
+
+        @Override
+        public int getRowCount() {
+            return data.length;
+        }
+
+        @Override
+        public int getColumnCount() {
+            return data[0].length;
+        }
+
+        @Override
+        public String getColumnName(int columnIndex) {
+            String[] names = {"Algorithm", "max mem (bytes)", "time (ms)"};
+            return names[columnIndex];
+        }
+
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            return getValueAt(0, columnIndex).getClass();
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            return data[rowIndex][columnIndex];
+        }
+
+    }
+
 }
