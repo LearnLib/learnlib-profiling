@@ -50,7 +50,8 @@
         <!-- dependency versions -->
         <checkstyle.version>8.1</checkstyle.version>
         <learnlib.version>0.13.1</learnlib.version>
-        <jfreechart.version>1.0.14</jfreechart.version>
+        <jfreechart.version>1.5.0</jfreechart.version>
+        <jmh.version>1.21</jmh.version>
     </properties>
 
     <!--  
@@ -65,7 +66,7 @@
                 <configuration>
                     <configLocation>/automatalib-learnlib-checkstyle.xml</configLocation>
                     <headerLocation>/license-header-java.txt</headerLocation>
-                    <suppressionsLocation>/learnlib-checkstyle-suppressions.xml</suppressionsLocation>
+                    <suppressionsLocation>${project.basedir}/src/main/resources/checkstyle-suppressions.xml</suppressionsLocation>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <linkXRef>false</linkXRef>
                 </configuration>
@@ -118,6 +119,31 @@
             <artifactId>jfreechart</artifactId>
             <version>${jfreechart.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
 </project>
 
