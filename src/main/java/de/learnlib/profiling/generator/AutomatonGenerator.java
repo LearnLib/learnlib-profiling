@@ -33,8 +33,8 @@ import net.automatalib.words.impl.Alphabets;
  */
 public final class AutomatonGenerator {
 
-    static final Alphabet<Character> INPUT_ALPHABET = Alphabets.characters('1', '6');
-    static final Alphabet<Character> OUTPUT_ALPHABET = Alphabets.characters('a', 'f');
+    public static final Alphabet<Character> INPUT_ALPHABET = Alphabets.characters('1', '6');
+    public static final Alphabet<Character> OUTPUT_ALPHABET = Alphabets.characters('a', 'f');
 
     private AutomatonGenerator() {
         // prevent instantiation
