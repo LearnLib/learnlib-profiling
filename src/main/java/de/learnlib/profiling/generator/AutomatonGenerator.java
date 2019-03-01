@@ -24,17 +24,30 @@ import net.automatalib.automata.fsa.impl.compact.CompactDFA;
 import net.automatalib.automata.transducers.MealyMachine;
 import net.automatalib.automata.transducers.impl.FastMealy;
 import net.automatalib.automata.transducers.impl.compact.CompactMealy;
+import net.automatalib.automata.vpda.DefaultOneSEVPA;
 import net.automatalib.util.automata.random.RandomAutomata;
 import net.automatalib.words.Alphabet;
+import net.automatalib.words.VPDAlphabet;
 import net.automatalib.words.impl.Alphabets;
+import net.automatalib.words.impl.DefaultVPDAlphabet;
 
 /**
  * @author frohme
  */
 public final class AutomatonGenerator {
 
-    public static final Alphabet<Character> INPUT_ALPHABET = Alphabets.characters('1', '6');
-    public static final Alphabet<Character> OUTPUT_ALPHABET = Alphabets.characters('a', 'f');
+    public static final Alphabet<Character> INPUT_ALPHABET;
+    public static final Alphabet<Character> OUTPUT_ALPHABET;
+    public static final VPDAlphabet<Character> VPD_ALPHABET;
+
+    static {
+        INPUT_ALPHABET = Alphabets.characters('1', '6');
+        OUTPUT_ALPHABET = Alphabets.characters('a', 'f');
+
+        final Alphabet<Character> returnAlphabet = Alphabets.characters('A', 'C');
+
+        VPD_ALPHABET = new DefaultVPDAlphabet<>(INPUT_ALPHABET, OUTPUT_ALPHABET, returnAlphabet);
+    }
 
     private AutomatonGenerator() {
         // prevent instantiation
@@ -74,5 +87,9 @@ public final class AutomatonGenerator {
                                                   Collections.singleton(null),
                                                   OUTPUT_ALPHABET,
                                                   new FastMealy<>(INPUT_ALPHABET));
+    }
+
+    public static DefaultOneSEVPA<Character> generateDefaultOneSEVPA(int seed, int size) {
+        return RandomAutomata.randomOneSEVPA(new Random(seed), size, VPD_ALPHABET, 0.3, 0.3, false);
     }
 }
