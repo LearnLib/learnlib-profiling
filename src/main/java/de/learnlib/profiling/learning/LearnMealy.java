@@ -1,4 +1,4 @@
-/* Copyright (C) 2013-2019 TU Dortmund
+/* Copyright (C) 2013-2020 TU Dortmund
  * This file is part of LearnLib, http://www.learnlib.de/.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ import de.learnlib.algorithms.lstar.ce.ObservationTableCEXHandlers;
 import de.learnlib.algorithms.lstar.closing.ClosingStrategies;
 import de.learnlib.algorithms.lstar.mealy.ClassicLStarMealy;
 import de.learnlib.algorithms.lstar.mealy.ExtensibleLStarMealy;
-import de.learnlib.oracle.equivalence.SimulatorEQOracle;
+import de.learnlib.oracle.equivalence.MealySimulatorEQOracle;
 import de.learnlib.oracle.membership.SimulatorOracle;
 import de.learnlib.profiling.memprobe.MemProbeChart;
 import de.learnlib.profiling.memprobe.MemProbeSample;
@@ -67,7 +67,7 @@ public final class LearnMealy {
                                                                                    new CompactMealy<>(inputs));
 
         SimulatorOracle<Symbol, Word<String>> simoracle = new SimulatorOracle<>(fm);
-        SimulatorEQOracle<Symbol, Word<String>> eqoracle = new SimulatorEQOracle<>(fm);
+        MealySimulatorEQOracle<Symbol, String> eqoracle = new MealySimulatorEQOracle<>(fm);
 
         NamedLearnerList<MealyMachine<?, Symbol, ?, String>, Symbol, Word<String>> algos = new NamedLearnerList<>();
 

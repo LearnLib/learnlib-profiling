@@ -1,4 +1,4 @@
-/* Copyright (C) 2013-2019 TU Dortmund
+/* Copyright (C) 2013-2020 TU Dortmund
  * This file is part of LearnLib, http://www.learnlib.de/.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@ package de.learnlib.profiling.generator;
 
 import de.learnlib.api.oracle.EquivalenceOracle.DFAEquivalenceOracle;
 import de.learnlib.api.oracle.MembershipOracle.DFAMembershipOracle;
-import de.learnlib.oracle.equivalence.SimulatorEQOracle.DFASimulatorEQOracle;
+import de.learnlib.oracle.equivalence.DFASimulatorEQOracle;
 import de.learnlib.oracle.membership.SimulatorOracle.DFASimulatorOracle;
 import net.automatalib.automata.fsa.DFA;
 import net.automatalib.words.Alphabet;

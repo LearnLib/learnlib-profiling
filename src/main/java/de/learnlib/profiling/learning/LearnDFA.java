@@ -1,4 +1,4 @@
-/* Copyright (C) 2013-2019 TU Dortmund
+/* Copyright (C) 2013-2020 TU Dortmund
  * This file is part of LearnLib, http://www.learnlib.de/.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@ import java.util.Random;
 import de.learnlib.algorithms.lstar.ce.ObservationTableCEXHandlers;
 import de.learnlib.algorithms.lstar.closing.ClosingStrategies;
 import de.learnlib.algorithms.lstar.dfa.ExtensibleLStarDFA;
-import de.learnlib.oracle.equivalence.SimulatorEQOracle;
+import de.learnlib.oracle.equivalence.DFASimulatorEQOracle;
 import de.learnlib.oracle.membership.SimulatorOracle;
 import de.learnlib.profiling.memprobe.MemProbeChart;
 import de.learnlib.profiling.memprobe.MemProbeSample;
@@ -58,7 +58,7 @@ public final class LearnDFA {
         System.err.println("Target has " + dfa.size() + " states");
 
         SimulatorOracle<Symbol, Boolean> simoracle = new SimulatorOracle<>(dfa);
-        SimulatorEQOracle<Symbol, Boolean> eqoracle = new SimulatorEQOracle<>(dfa);
+        DFASimulatorEQOracle<Symbol> eqoracle = new DFASimulatorEQOracle<>(dfa);
 
         NamedLearnerList<DFA<?, Symbol>, Symbol, Boolean> algos = new NamedLearnerList<>();
 

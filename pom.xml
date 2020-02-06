@@ -49,7 +49,7 @@
 
         <!-- dependency versions -->
         <checkstyle.version>8.18</checkstyle.version>
-        <learnlib.version>0.14.0</learnlib.version>
+        <learnlib.version>0.15.0</learnlib.version>
         <jfreechart.version>1.5.0</jfreechart.version>
         <jmh.version>1.21</jmh.version>
     </properties>
@@ -78,7 +78,7 @@
                     </dependency>
                     <dependency>
                         <groupId>de.learnlib</groupId>
-                        <artifactId>learnlib-build-tools</artifactId>
+                        <artifactId>learnlib-build-config</artifactId>
                         <version>${learnlib.version}</version>
                     </dependency>
                 </dependencies>

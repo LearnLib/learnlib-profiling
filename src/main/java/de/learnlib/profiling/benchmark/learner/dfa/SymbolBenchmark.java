@@ -1,4 +1,4 @@
-/* Copyright (C) 2013-2019 TU Dortmund
+/* Copyright (C) 2013-2020 TU Dortmund
  * This file is part of LearnLib, http://www.learnlib.de/.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +16,7 @@
 package de.learnlib.profiling.benchmark.learner.dfa;
 
 import de.learnlib.api.algorithm.LearningAlgorithm.DFALearner;
-import de.learnlib.filter.statistic.oracle.JointCounterOracle.DFAJointCounterOracle;
+import de.learnlib.filter.statistic.oracle.DFAJointCounterOracle;
 
 /**
  * @author frohme
