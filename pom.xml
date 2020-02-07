@@ -45,13 +45,14 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <!-- plugin versions -->
-        <checkstyle-plugin.version>2.17</checkstyle-plugin.version>
+        <checkstyle-plugin.version>3.1.0</checkstyle-plugin.version>
 
         <!-- dependency versions -->
         <checkstyle.version>8.29</checkstyle.version>
         <learnlib.version>0.15.0</learnlib.version>
         <jfreechart.version>1.5.0</jfreechart.version>
-        <jmh.version>1.21</jmh.version>
+        <jmh.version>1.23</jmh.version>
+        <jol.version>0.10</jol.version>
     </properties>
 
     <!--  
@@ -135,7 +136,7 @@
         <dependency>
             <groupId>org.openjdk.jol</groupId>
             <artifactId>jol-core</artifactId>
-            <version>0.9</version>
+            <version>${jol.version}</version>
         </dependency>
 
         <dependency>
