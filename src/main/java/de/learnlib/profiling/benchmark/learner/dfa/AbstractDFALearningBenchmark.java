@@ -1,5 +1,5 @@
-/* Copyright (C) 2013-2020 TU Dortmund
- * This file is part of LearnLib, http://www.learnlib.de/.
+/* Copyright (C) 2013-2025 TU Dortmund University
+ * This file is part of LearnLib <https://learnlib.de>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,19 +19,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import de.learnlib.api.algorithm.LearningAlgorithm.DFALearner;
-import de.learnlib.api.oracle.MembershipOracle.DFAMembershipOracle;
-import de.learnlib.filter.statistic.oracle.DFAJointCounterOracle;
+import de.learnlib.algorithm.LearningAlgorithm.DFALearner;
+import de.learnlib.filter.statistic.oracle.DFACounterOracle;
+import de.learnlib.oracle.MembershipOracle.DFAMembershipOracle;
 import de.learnlib.profiling.benchmark.AbstractBenchmark;
 import de.learnlib.profiling.benchmark.Benchmark;
 import de.learnlib.profiling.generator.ActiveDFALearner;
 import de.learnlib.profiling.generator.DFABenchmarkInput;
 import de.learnlib.util.Experiment.DFAExperiment;
-import net.automatalib.words.Alphabet;
+import net.automatalib.alphabet.Alphabet;
 
-/**
- * @author frohme
- */
 public abstract class AbstractDFALearningBenchmark extends AbstractBenchmark {
 
     @Override
@@ -61,7 +58,7 @@ public abstract class AbstractDFALearningBenchmark extends AbstractBenchmark {
     }
 
     private long getDTLearner(int iter, int param) {
-        return buildBenchmark(new DFABenchmarkInput(iter, param), ActiveDFALearner.DT::buildInstance);
+        return buildBenchmark(new DFABenchmarkInput(iter, param), ActiveDFALearner.OP::buildInstance);
     }
 
     private long getKVLearner(int iter, int param) {
@@ -75,7 +72,7 @@ public abstract class AbstractDFALearningBenchmark extends AbstractBenchmark {
     private long buildBenchmark(DFABenchmarkInput input,
                                 BiFunction<Alphabet<Character>, DFAMembershipOracle<Character>, DFALearner<Character>> learnerBuilder) {
 
-        final DFAJointCounterOracle<Character> oracle = new DFAJointCounterOracle<>(input.getMembershipOracle());
+        final DFACounterOracle<Character> oracle = new DFACounterOracle<>(input.getMembershipOracle());
 
         final DFALearner<Character> learnerDFA = learnerBuilder.apply(input.getAlphabet(), oracle);
 
@@ -88,6 +85,5 @@ public abstract class AbstractDFALearningBenchmark extends AbstractBenchmark {
 
     }
 
-    protected abstract long extractBenchmarkValue(DFAJointCounterOracle<Character> oracle,
-                                                  DFALearner<Character> learner);
+    protected abstract long extractBenchmarkValue(DFACounterOracle<Character> oracle, DFALearner<Character> learner);
 }

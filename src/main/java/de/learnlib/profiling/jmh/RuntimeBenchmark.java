@@ -1,5 +1,5 @@
-/* Copyright (C) 2013-2020 TU Dortmund
- * This file is part of LearnLib, http://www.learnlib.de/.
+/* Copyright (C) 2013-2025 TU Dortmund University
+ * This file is part of LearnLib <https://learnlib.de>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package de.learnlib.profiling.jmh;
 
-import de.learnlib.api.algorithm.LearningAlgorithm.DFALearner;
+import de.learnlib.algorithm.LearningAlgorithm.DFALearner;
 import de.learnlib.profiling.generator.ActiveDFALearner;
 import de.learnlib.util.Experiment.DFAExperiment;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -30,9 +30,6 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
-/**
- * @author frohme
- */
 @BenchmarkMode(Mode.Throughput)
 @Warmup(iterations = 5, time = 5)
 @Measurement(iterations = 10, time = 5)

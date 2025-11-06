@@ -1,5 +1,5 @@
-/* Copyright (C) 2013-2020 TU Dortmund
- * This file is part of LearnLib, http://www.learnlib.de/.
+/* Copyright (C) 2013-2025 TU Dortmund University
+ * This file is part of LearnLib <https://learnlib.de>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,17 +21,14 @@ import java.util.Map;
 import de.learnlib.profiling.benchmark.AbstractBenchmark;
 import de.learnlib.profiling.benchmark.Benchmark;
 import de.learnlib.profiling.generator.AutomatonGenerator;
-import net.automatalib.automata.fsa.DFA;
-import net.automatalib.automata.fsa.impl.compact.CompactNFA;
-import net.automatalib.util.automata.copy.AutomatonCopyMethod;
-import net.automatalib.util.automata.copy.AutomatonLowLevelCopy;
+import net.automatalib.automaton.fsa.DFA;
+import net.automatalib.automaton.fsa.impl.CompactNFA;
+import net.automatalib.util.automaton.copy.AutomatonCopyMethod;
+import net.automatalib.util.automaton.copy.AutomatonLowLevelCopy;
 import org.openjdk.jol.info.GraphLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * @author frohme
- */
 public class NFASizeBenchmark extends AbstractBenchmark {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NFASizeBenchmark.class);

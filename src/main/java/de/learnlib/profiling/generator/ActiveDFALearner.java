@@ -1,5 +1,5 @@
-/* Copyright (C) 2013-2020 TU Dortmund
- * This file is part of LearnLib, http://www.learnlib.de/.
+/* Copyright (C) 2013-2025 TU Dortmund University
+ * This file is part of LearnLib <https://learnlib.de>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,14 @@
  */
 package de.learnlib.profiling.generator;
 
-import de.learnlib.algorithms.discriminationtree.dfa.DTLearnerDFABuilder;
-import de.learnlib.algorithms.kv.dfa.KearnsVaziraniDFABuilder;
-import de.learnlib.algorithms.lstar.dfa.ExtensibleLStarDFABuilder;
-import de.learnlib.algorithms.ttt.dfa.TTTLearnerDFABuilder;
-import de.learnlib.api.algorithm.LearningAlgorithm.DFALearner;
-import de.learnlib.api.oracle.MembershipOracle;
-import net.automatalib.words.Alphabet;
+import de.learnlib.algorithm.LearningAlgorithm.DFALearner;
+import de.learnlib.algorithm.kv.dfa.KearnsVaziraniDFABuilder;
+import de.learnlib.algorithm.lstar.dfa.ExtensibleLStarDFABuilder;
+import de.learnlib.algorithm.observationpack.dfa.OPLearnerDFABuilder;
+import de.learnlib.algorithm.ttt.dfa.TTTLearnerDFABuilder;
+import de.learnlib.oracle.MembershipOracle;
+import net.automatalib.alphabet.Alphabet;
 
-/**
- * @author frohme
- */
 public enum ActiveDFALearner {
 
     LSTAR {
@@ -34,10 +31,10 @@ public enum ActiveDFALearner {
             return new ExtensibleLStarDFABuilder<I>().withAlphabet(alphabet).withOracle(oracle).create();
         }
     },
-    DT {
+    OP {
         @Override
         public <I> DFALearner<I> buildInstance(Alphabet<I> alphabet, MembershipOracle<I, Boolean> oracle) {
-            return new DTLearnerDFABuilder<I>().withAlphabet(alphabet).withOracle(oracle).create();
+            return new OPLearnerDFABuilder<I>().withAlphabet(alphabet).withOracle(oracle).create();
         }
     },
     KV {

@@ -1,5 +1,5 @@
-/* Copyright (C) 2013-2020 TU Dortmund
- * This file is part of LearnLib, http://www.learnlib.de/.
+/* Copyright (C) 2013-2025 TU Dortmund University
+ * This file is part of LearnLib <https://learnlib.de>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,27 +18,24 @@ package de.learnlib.profiling.generator;
 import java.util.Collections;
 import java.util.Random;
 
-import net.automatalib.automata.fsa.DFA;
-import net.automatalib.automata.fsa.impl.FastDFA;
-import net.automatalib.automata.fsa.impl.compact.CompactDFA;
-import net.automatalib.automata.transducers.MealyMachine;
-import net.automatalib.automata.transducers.impl.FastMealy;
-import net.automatalib.automata.transducers.impl.compact.CompactMealy;
-import net.automatalib.automata.vpda.DefaultOneSEVPA;
-import net.automatalib.util.automata.random.RandomAutomata;
-import net.automatalib.words.Alphabet;
-import net.automatalib.words.VPDAlphabet;
-import net.automatalib.words.impl.Alphabets;
-import net.automatalib.words.impl.DefaultVPDAlphabet;
+import net.automatalib.alphabet.Alphabet;
+import net.automatalib.alphabet.VPAlphabet;
+import net.automatalib.alphabet.impl.Alphabets;
+import net.automatalib.alphabet.impl.DefaultVPAlphabet;
+import net.automatalib.automaton.fsa.DFA;
+import net.automatalib.automaton.fsa.impl.CompactDFA;
+import net.automatalib.automaton.fsa.impl.FastDFA;
+import net.automatalib.automaton.transducer.MealyMachine;
+import net.automatalib.automaton.transducer.impl.CompactMealy;
+import net.automatalib.automaton.transducer.impl.FastMealy;
+import net.automatalib.automaton.vpa.impl.DefaultOneSEVPA;
+import net.automatalib.util.automaton.random.RandomAutomata;
 
-/**
- * @author frohme
- */
 public final class AutomatonGenerator {
 
     public static final Alphabet<Character> INPUT_ALPHABET;
     public static final Alphabet<Character> OUTPUT_ALPHABET;
-    public static final VPDAlphabet<Character> VPD_ALPHABET;
+    public static final VPAlphabet<Character> VPD_ALPHABET;
 
     static {
         INPUT_ALPHABET = Alphabets.characters('1', '6');
@@ -46,7 +43,7 @@ public final class AutomatonGenerator {
 
         final Alphabet<Character> returnAlphabet = Alphabets.characters('A', 'C');
 
-        VPD_ALPHABET = new DefaultVPDAlphabet<>(INPUT_ALPHABET, OUTPUT_ALPHABET, returnAlphabet);
+        VPD_ALPHABET = new DefaultVPAlphabet<>(INPUT_ALPHABET, OUTPUT_ALPHABET, returnAlphabet);
     }
 
     private AutomatonGenerator() {

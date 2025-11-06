@@ -20,4 +20,5 @@ limitations under the License.
 
 <suppressions>
     <suppress checks="MagicNumber" files=".*"/>
+    <suppress checks="." files="target/*"/>
 </suppressions>

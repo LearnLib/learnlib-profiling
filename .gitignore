@@ -1,7 +1,15 @@
-.classpath
-.settings/
-.project
-/target/
-/bin/
-*~
+# Maven output
+target/
 
+# Eclipse output directory
+bin/
+
+# Eclipse settings
+.settings/
+.classpath
+.project
+.factorypath
+
+#Intellij settings
+*.iml
+.idea/

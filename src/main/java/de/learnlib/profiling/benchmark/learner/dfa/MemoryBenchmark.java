@@ -1,5 +1,5 @@
-/* Copyright (C) 2013-2020 TU Dortmund
- * This file is part of LearnLib, http://www.learnlib.de/.
+/* Copyright (C) 2013-2025 TU Dortmund University
+ * This file is part of LearnLib <https://learnlib.de>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,10 @@
  */
 package de.learnlib.profiling.benchmark.learner.dfa;
 
-import de.learnlib.api.algorithm.LearningAlgorithm.DFALearner;
-import de.learnlib.filter.statistic.oracle.DFAJointCounterOracle;
+import de.learnlib.algorithm.LearningAlgorithm.DFALearner;
+import de.learnlib.filter.statistic.oracle.DFACounterOracle;
 import org.openjdk.jol.info.GraphLayout;
 
-/**
- * @author frohme
- */
 public class MemoryBenchmark extends AbstractDFALearningBenchmark {
 
     public static void main(String[] args) {
@@ -32,7 +29,7 @@ public class MemoryBenchmark extends AbstractDFALearningBenchmark {
     }
 
     @Override
-    protected long extractBenchmarkValue(DFAJointCounterOracle<Character> oracle, DFALearner<Character> learner) {
+    protected long extractBenchmarkValue(DFACounterOracle<Character> oracle, DFALearner<Character> learner) {
         return GraphLayout.parseInstance(learner).totalSize() - GraphLayout.parseInstance(oracle).totalSize();
     }
 

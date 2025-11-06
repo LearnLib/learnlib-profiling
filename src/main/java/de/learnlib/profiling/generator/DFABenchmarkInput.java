@@ -1,5 +1,5 @@
-/* Copyright (C) 2013-2020 TU Dortmund
- * This file is part of LearnLib, http://www.learnlib.de/.
+/* Copyright (C) 2013-2025 TU Dortmund University
+ * This file is part of LearnLib <https://learnlib.de>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,13 @@
  */
 package de.learnlib.profiling.generator;
 
-import de.learnlib.api.oracle.EquivalenceOracle.DFAEquivalenceOracle;
-import de.learnlib.api.oracle.MembershipOracle.DFAMembershipOracle;
+import de.learnlib.oracle.EquivalenceOracle.DFAEquivalenceOracle;
+import de.learnlib.oracle.MembershipOracle.DFAMembershipOracle;
 import de.learnlib.oracle.equivalence.DFASimulatorEQOracle;
-import de.learnlib.oracle.membership.SimulatorOracle.DFASimulatorOracle;
-import net.automatalib.automata.fsa.DFA;
-import net.automatalib.words.Alphabet;
+import de.learnlib.oracle.membership.DFASimulatorOracle;
+import net.automatalib.alphabet.Alphabet;
+import net.automatalib.automaton.fsa.DFA;
 
-/**
- * @author frohme
- */
 public class DFABenchmarkInput {
 
     private DFAMembershipOracle<Character> membershipOracle;

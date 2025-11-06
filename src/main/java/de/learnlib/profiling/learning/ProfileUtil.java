@@ -1,5 +1,5 @@
-/* Copyright (C) 2013-2020 TU Dortmund
- * This file is part of LearnLib, http://www.learnlib.de/.
+/* Copyright (C) 2013-2025 TU Dortmund University
+ * This file is part of LearnLib <https://learnlib.de>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.learnlib.api.algorithm.LearningAlgorithm;
-import de.learnlib.api.oracle.EquivalenceOracle;
-import de.learnlib.api.query.DefaultQuery;
+import de.learnlib.algorithm.LearningAlgorithm;
+import de.learnlib.oracle.EquivalenceOracle;
 import de.learnlib.profiling.memprobe.MemProbeSample;
 import de.learnlib.profiling.memprobe.MemProbeThread;
-import net.automatalib.automata.UniversalDeterministicAutomaton;
+import de.learnlib.query.DefaultQuery;
+import net.automatalib.automaton.UniversalDeterministicAutomaton;
 
 public final class ProfileUtil {
 

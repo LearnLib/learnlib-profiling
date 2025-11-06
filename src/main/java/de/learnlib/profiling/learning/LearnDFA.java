@@ -1,5 +1,5 @@
-/* Copyright (C) 2013-2020 TU Dortmund
- * This file is part of LearnLib, http://www.learnlib.de/.
+/* Copyright (C) 2013-2025 TU Dortmund University
+ * This file is part of LearnLib <https://learnlib.de>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import de.learnlib.algorithms.lstar.ce.ObservationTableCEXHandlers;
-import de.learnlib.algorithms.lstar.closing.ClosingStrategies;
-import de.learnlib.algorithms.lstar.dfa.ExtensibleLStarDFA;
+import de.learnlib.algorithm.lstar.ce.ObservationTableCEXHandlers;
+import de.learnlib.algorithm.lstar.closing.ClosingStrategies;
+import de.learnlib.algorithm.lstar.dfa.ExtensibleLStarDFA;
 import de.learnlib.oracle.equivalence.DFASimulatorEQOracle;
 import de.learnlib.oracle.membership.SimulatorOracle;
 import de.learnlib.profiling.memprobe.MemProbeChart;
 import de.learnlib.profiling.memprobe.MemProbeSample;
-import net.automatalib.automata.fsa.DFA;
-import net.automatalib.automata.fsa.impl.compact.CompactDFA;
-import net.automatalib.util.automata.random.RandomAutomata;
-import net.automatalib.words.Alphabet;
-import net.automatalib.words.impl.FastAlphabet;
-import net.automatalib.words.impl.Symbol;
-
+import net.automatalib.alphabet.Alphabet;
+import net.automatalib.alphabet.impl.FastAlphabet;
+import net.automatalib.alphabet.impl.Symbol;
+import net.automatalib.automaton.fsa.DFA;
+import net.automatalib.automaton.fsa.impl.CompactDFA;
+import net.automatalib.util.automaton.random.RandomAutomata;
 
 public final class LearnDFA {
 
@@ -46,9 +45,9 @@ public final class LearnDFA {
         // Uncomment for use with VisualVM
         // System.in.read();
 
-        Alphabet<Symbol> inputs = new FastAlphabet<>(new Symbol("a"), new Symbol("b"), new Symbol("c"));
+        Alphabet<Symbol<String>> inputs = new FastAlphabet<>(new Symbol<>("a"), new Symbol<>("b"), new Symbol<>("c"));
 
-        DFA<?, Symbol> dfa = RandomAutomata.randomDeterministic(new Random(ProfileUtil.DEFAULT_SEED),
+        DFA<?, Symbol<String>> dfa = RandomAutomata.randomDeterministic(new Random(ProfileUtil.DEFAULT_SEED),
                                                                 ProfileUtil.DEFAULT_SIZE,
                                                                 inputs,
                                                                 Arrays.asList(true, false),
@@ -57,10 +56,10 @@ public final class LearnDFA {
 
         System.err.println("Target has " + dfa.size() + " states");
 
-        SimulatorOracle<Symbol, Boolean> simoracle = new SimulatorOracle<>(dfa);
-        DFASimulatorEQOracle<Symbol> eqoracle = new DFASimulatorEQOracle<>(dfa);
+        SimulatorOracle<Symbol<String>, Boolean> simoracle = new SimulatorOracle<>(dfa);
+        DFASimulatorEQOracle<Symbol<String>> eqoracle = new DFASimulatorEQOracle<>(dfa);
 
-        NamedLearnerList<DFA<?, Symbol>, Symbol, Boolean> algos = new NamedLearnerList<>();
+        NamedLearnerList<DFA<?, Symbol<String>>, Symbol<String>, Boolean> algos = new NamedLearnerList<>();
 
         algos.addLearner("ExtensibleLStarDFA",
                          new ExtensibleLStarDFA<>(inputs,

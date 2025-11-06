@@ -1,5 +1,5 @@
-/* Copyright (C) 2013-2020 TU Dortmund
- * This file is part of LearnLib, http://www.learnlib.de/.
+/* Copyright (C) 2013-2025 TU Dortmund University
+ * This file is part of LearnLib <https://learnlib.de>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ package de.learnlib.profiling.learning;
 
 import java.util.ArrayList;
 
-import de.learnlib.api.algorithm.LearningAlgorithm;
+import de.learnlib.algorithm.LearningAlgorithm;
 
 public class NamedLearnerList<M, I, O> extends ArrayList<NamedLearner<M, I, O>> {
 

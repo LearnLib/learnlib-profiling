@@ -24,6 +24,31 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <id>mtf90</id>
+            <name>Markus Frohme</name>
+            <email>markus.frohme@udo.edu</email>
+            <organization>TU Dortmund University, Chair of Programming Systems</organization>
+            <organizationUrl>http://ls5-www.cs.tu-dortmund.de/</organizationUrl>
+            <roles>
+                <role>Developer</role>
+                <role>Maintainer</role>
+            </roles>
+        </developer>
+    </developers>
+    <contributors>
+        <contributor>
+            <name>Maik Merten</name>
+            <email>maikmerten@googlemail.com</email>
+            <organization>TU Dortmund University, Chair of Programming Systems</organization>
+            <organizationUrl>http://ls5-www.cs.tu-dortmund.de/</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </contributor>
+    </contributors>
+
     <!--
     ===============================  SCM =======================  
     -->
@@ -43,16 +68,17 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.release>8</maven.compiler.release>
 
         <!-- plugin versions -->
-        <checkstyle-plugin.version>3.1.0</checkstyle-plugin.version>
+        <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
 
         <!-- dependency versions -->
-        <checkstyle.version>8.29</checkstyle.version>
-        <learnlib.version>0.16.0</learnlib.version>
-        <jfreechart.version>1.5.0</jfreechart.version>
-        <jmh.version>1.23</jmh.version>
-        <jol.version>0.10</jol.version>
+        <checkstyle.version>10.21.1</checkstyle.version>
+        <learnlib.version>0.18.0</learnlib.version>
+        <jfreechart.version>1.5.6</jfreechart.version>
+        <jmh.version>1.37</jmh.version>
+        <jol.version>0.17</jol.version>
     </properties>
 
     <!--  
